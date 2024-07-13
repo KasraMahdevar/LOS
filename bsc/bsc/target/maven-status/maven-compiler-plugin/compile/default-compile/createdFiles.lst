@@ -1,0 +1,10 @@
+com\example\bsc\model\Bestellung.class
+com\example\bsc\service\WareService.class
+com\example\bsc\BscApplication.class
+com\example\bsc\controller\WarenController.class
+com\example\bsc\model\Ware.class
+com\example\bsc\model\WareDTOs\WareGetDto.class
+com\example\bsc\repo\WareRepo.class
+com\example\bsc\model\WareDTOs\WarePostDto.class
+com\example\bsc\personal\Besteller.class
+com\example\bsc\personal\Personal.class
