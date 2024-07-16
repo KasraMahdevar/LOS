@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Schema(hidden=true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

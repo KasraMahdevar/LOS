@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "springdoc.swagger-ui.schemas.enabled",
+      "type": "java.lang.String",
+      "description": "Description for springdoc.swagger-ui.schemas.enabled."
+  }
+] }

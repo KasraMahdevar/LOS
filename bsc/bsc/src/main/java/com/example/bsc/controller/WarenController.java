@@ -2,6 +2,7 @@ package com.example.bsc.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,7 @@ public class WarenController {
     @Autowired
     private WareService wareService;
 
-    @Tag(name = "Alle Waren erhalten")
-    
+    @Tag(name = "Alle Waren")
     @GetMapping("/get_all")
     public List<WareGetDto> getAll() {
         return wareService.getAll();

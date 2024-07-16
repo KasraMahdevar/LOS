@@ -34,8 +34,8 @@ public class Bestellung {
     @Column(name="id", nullable=false)
     private Long id;
 
-    @Column(name="bestellungsnummer", nullable=false)
-    private Long bestellungsNummer;
+    @Column(name="liefernummer", nullable=false)
+    private Long liefernummer;
 
     @ManyToOne
     @JoinColumn(name="besteller_id", nullable=false)
@@ -46,5 +46,11 @@ public class Bestellung {
 
     @OneToMany(mappedBy="bestellung")
     private List<Ware> warenListe;
+
+
+
+    public int warenAnzahl(){
+        return this.warenListe.size();
+    }
 
 }

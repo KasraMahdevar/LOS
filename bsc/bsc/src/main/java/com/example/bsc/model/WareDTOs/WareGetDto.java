@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Schema(hidden = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -17,6 +16,6 @@ public class WareGetDto {
     private String name;
     private Long menge;
     private Long lagerstand = null;
-    private Long bestellunsgnummer = null;
+    private Long liefernummer = null;
 
 }

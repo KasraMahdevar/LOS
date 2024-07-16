@@ -27,28 +27,29 @@ public class WareService {
         List<Ware> waren = wareRepo.findAll();
         List<WareGetDto> warenDto = new ArrayList<>();
 
-        if (!waren.isEmpty()) {
-            for (Ware ware : waren) {
-                WareGetDto dto = new WareGetDto();
+        if (waren.isEmpty()) {
+            throw new RuntimeException("Keine Ware vorhanden!");
+        }
+        for (Ware ware : waren) {
+            WareGetDto dto = new WareGetDto();
 
-                dto.setId(ware.getId());
-                dto.setName(ware.getName());
-                dto.setMenge(ware.getMenge());
+            dto.setId(ware.getId());
+            dto.setName(ware.getName());
+            dto.setMenge(ware.getMenge());
 
-                if (ware.getBestellung() != null) {
-                    dto.setBestellunsgnummer(ware.getBestellung().getBestellungsNummer());
-                }
-
-                if (ware.getLagerstand() != null) {
-                    dto.setLagerstand(ware.getLagerstand());
-                }
-                warenDto.add(dto);
+            if (ware.getBestellung() != null) {
+                dto.setLiefernummer(ware.getBestellung().getLiefernummer());
             }
-            return warenDto;
+
+            if (ware.getLagerstand() != null) {
+                dto.setLagerstand(ware.getLagerstand());
+            }
+            warenDto.add(dto);
         }
         return warenDto;
-
     }
+
+
 
     /**
      *
@@ -66,13 +67,14 @@ public class WareService {
             dto.setLagerstand(ware.getLagerstand());
         }
         if (ware.getBestellung() != null) {
-            dto.setBestellunsgnummer(ware.getBestellung().getBestellungsNummer());
+            dto.setLiefernummer(ware.getBestellung().getLiefernummer());
         }
         return dto;
     }
 
     @Transactional
     public void addWare(WarePostDto ware) {
+
         Ware new_ware = new Ware();
         new_ware.setName(ware.getName());
         new_ware.setMenge(ware.getMenge());
