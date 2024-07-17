@@ -70,6 +70,7 @@ public class BestellungsService {
         new_bestellung.setLiefernummer(bestellungPostDto.getLiefernummer());
         for(WarePostDto wareDto:bestellungPostDto.getWarenListe()){
             Ware neue_ware = wareService.addWare(wareDto);
+            /* Bestellung sollte eingesetzt werden sonst die Liste von Waren werden nicht zurückgegeben */
             neue_ware.setBestellung(new_bestellung);
             new_bestellung.getWarenListe().add(neue_ware);
         }
