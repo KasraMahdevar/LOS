@@ -1,20 +1,33 @@
 package com.example.bsc.service;
 
-import com.example.bsc.model.Bestellung;
-import com.example.bsc.model.BestellungDTOs.BestellungGetDto;
-import com.example.bsc.repo.BestellungsRepo;
-import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.bsc.model.Bestellung;
+import com.example.bsc.model.BestellungDTOs.BestellungGetDto;
+import com.example.bsc.model.BestellungDTOs.BestellungPostDto;
+import com.example.bsc.model.Ware;
+import com.example.bsc.model.WareDTOs.WarePostDto;
+import com.example.bsc.personal.Besteller;
+import com.example.bsc.repo.BestellerRepo;
+import com.example.bsc.repo.BestellungsRepo;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class BestellungsService {
 
     @Autowired
     private BestellungsRepo bestellungsRepo;
+
+    @Autowired
+    private BestellerRepo bestellerRepo;
+
+    @Autowired
+    private WareService wareService;
 
     /**
      *
@@ -31,7 +44,7 @@ public class BestellungsService {
 
             bestellungGetDto.setLiefernummer(bestellung.getLiefernummer());
             bestellungGetDto.setLieferDatum(bestellung.getLieferDatum());
-            bestellungGetDto.setBesteller_id(bestellung.getBesteller());
+            bestellungGetDto.setBesteller(bestellung.getBesteller());
             bestellungGetDto.setWarenListe(bestellung.getWarenListe());
 
             dto_bestellungen.add(bestellungGetDto);
@@ -46,12 +59,20 @@ public class BestellungsService {
      * @param bestellung
      */
     @Transactional
-    public void addBestellung(Bestellung bestellung){
+    public void addBestellung(BestellungPostDto bestellungPostDto){
+        Besteller besteller = bestellerRepo.findById(bestellungPostDto.getBesteller_id()).orElseThrow(
+            () -> new RuntimeException("Kein Personal mit der ID " + bestellungPostDto.getBesteller_id() + " im System vorhanden!")
+            );
+        
         Bestellung new_bestellung = new Bestellung();
-        new_bestellung.setBesteller(bestellung.getBesteller());
-        new_bestellung.setLieferDatum(bestellung.getLieferDatum());
-        new_bestellung.setLiefernummer(bestellung.getLiefernummer());
-        new_bestellung.setWarenListe(bestellung.getWarenListe());
+        new_bestellung.setBesteller(besteller);
+        new_bestellung.setLieferDatum(bestellungPostDto.getLieferDatum());
+        new_bestellung.setLiefernummer(bestellungPostDto.getLiefernummer());
+        for(WarePostDto wareDto:bestellungPostDto.getWarenListe()){
+            Ware neue_ware = wareService.addWare(wareDto);
+            neue_ware.setBestellung(new_bestellung);
+            new_bestellung.getWarenListe().add(neue_ware);
+        }
 
         bestellungsRepo.save(new_bestellung);
     }

@@ -1,4 +1,4 @@
-package com.example.bsc.model.WareDTOs;
+package com.example.bsc.personal.BestellerDTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class WarePostDto {
+public class BestellerPostDto {
 
-    private String name;
-    private Long menge;
+    private String vorname;
+    private String nachname;
 
 }

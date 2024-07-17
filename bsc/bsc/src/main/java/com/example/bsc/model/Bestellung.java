@@ -1,9 +1,11 @@
 package com.example.bsc.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.example.bsc.personal.Besteller;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,16 +43,21 @@ public class Bestellung {
     @JoinColumn(name="besteller_id", nullable=false)
     private Besteller besteller;
 
-    @Column(name="lieferung", nullable=true)
+    @Column(name="lieferung", nullable=false)
     private Date lieferDatum;
 
     @OneToMany(mappedBy="bestellung")
-    private List<Ware> warenListe;
+    @JsonIgnore
+    private List<Ware> warenListe = new ArrayList<>();
 
 
 
     public int warenAnzahl(){
         return this.warenListe.size();
+    }
+
+    public void addWare(Ware ware){
+        this.getWarenListe().add(ware);
     }
 
 }

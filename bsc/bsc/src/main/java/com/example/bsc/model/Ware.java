@@ -1,5 +1,7 @@
 package com.example.bsc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +29,7 @@ public class Ware {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "name", nullable = false)
@@ -36,11 +39,13 @@ public class Ware {
     private Long menge;
 
     @Column(name = "lagerstand", nullable = true)
+    @JsonIgnore
     private Long lagerstand;
 
     @ManyToOne
     @JoinColumn(name = "bestellung_id")
     @Nullable
+    @JsonIgnore
     private Bestellung bestellung;
 
 }

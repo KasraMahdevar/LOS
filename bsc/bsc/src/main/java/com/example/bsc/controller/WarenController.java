@@ -2,7 +2,6 @@ package com.example.bsc.controller;
 
 import java.util.List;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,7 @@ public class WarenController {
     @Autowired
     private WareService wareService;
 
-    @Tag(name = "Alle Waren")
+    @Tag(name = "Alle Waren finden")
     @GetMapping("/get_all")
     public List<WareGetDto> getAll() {
         return wareService.getAll();
@@ -45,7 +44,7 @@ public class WarenController {
         wareService.addWare(ware_dto);
     }
 
-    @Tag(name="Löschen eine Ware durch ID")
+    @Tag(name="Eine Ware durch ID löschen")
     @DeleteMapping("/delete/{id}")
     public void deleteWare(@PathVariable Long id){
         wareService.delete(id);

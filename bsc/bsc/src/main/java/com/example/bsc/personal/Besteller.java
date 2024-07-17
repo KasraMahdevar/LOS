@@ -3,6 +3,7 @@ package com.example.bsc.personal;
 import java.util.List;
 
 import com.example.bsc.model.Bestellung;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
@@ -26,6 +27,7 @@ public class Besteller extends Personal {
 
     @OneToMany(mappedBy = "besteller")
     @Nullable
+    @JsonIgnore
     private List<Bestellung> bestellungen;
 
     public int anzahlBestllungen() {

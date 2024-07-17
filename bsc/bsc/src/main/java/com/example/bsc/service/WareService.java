@@ -73,12 +73,13 @@ public class WareService {
     }
 
     @Transactional
-    public void addWare(WarePostDto ware) {
+    public Ware addWare(WarePostDto ware) {
 
         Ware new_ware = new Ware();
         new_ware.setName(ware.getName());
         new_ware.setMenge(ware.getMenge());
         wareRepo.save(new_ware);
+        return new_ware;
 
     }
 
