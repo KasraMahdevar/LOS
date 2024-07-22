@@ -7,4 +7,6 @@ import com.example.bsc.model.Bestellung;
 
 @Repository
 public interface BestellungsRepo extends JpaRepository<Bestellung, Long> {
+
+    Bestellung findBestellungByLiefernummer(Long liefernummer);
 }

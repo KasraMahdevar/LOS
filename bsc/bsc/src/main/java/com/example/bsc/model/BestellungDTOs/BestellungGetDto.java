@@ -24,5 +24,6 @@ public class BestellungGetDto {
     private Besteller besteller;
     private Date lieferDatum;
     private List<Ware> warenListe;
+    private boolean freigabe;
 
 }
