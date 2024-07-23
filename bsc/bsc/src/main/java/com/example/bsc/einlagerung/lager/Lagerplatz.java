@@ -13,6 +13,8 @@ import java.util.List;
 @ToString
 public class Lagerplatz {
 
+    //TODO Entity solle hier eingefügt werden
+
     private Long platznummer;
     private boolean besetzt = false;
     private List<Ware> warenListe = new ArrayList<>();
