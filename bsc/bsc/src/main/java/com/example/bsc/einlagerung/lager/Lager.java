@@ -1,17 +1,30 @@
 package com.example.bsc.einlagerung.lager;
 
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@NoArgsConstructor
-@AllArgsConstructor
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
 public class Lager {
 
-    private Long lagerplatzNummer;
-    private Long höhe;
-    private Long breite;
-    private boolean besetzt;
+    private static Lager instance;
+    private List<Lagerplatz> lagerplatzs = new ArrayList<>();
+
+    // verhindert mehrere Objekte direkt von Lager zu erstellen
+    private Lager() {
+    }
+
+    public static Lager getInstance() {
+        if (instance == null) {
+            instance = new Lager();
+        }
+        return instance;
+    }
+
 }

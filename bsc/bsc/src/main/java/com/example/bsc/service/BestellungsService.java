@@ -1,5 +1,6 @@
 package com.example.bsc.service;
 
+import com.example.bsc.einlagerung.einlagerungsprozess.Abholetikett;
 import com.example.bsc.model.Bestellung;
 import com.example.bsc.model.BestellungDTOs.BestellungGetDto;
 import com.example.bsc.model.BestellungDTOs.BestellungPostDto;
@@ -26,6 +27,9 @@ public class BestellungsService {
 
     @Autowired
     private WareService wareService;
+
+    @Autowired
+    private AbholetikettService abholetikettService;
 
     /**
      * @return eine Liste von allem Bestellungen sonst nichts
@@ -93,16 +97,20 @@ public class BestellungsService {
         );
     }
 
+    /**
+     * @param liefernummer, mit der eine Bestellung zur Einlagerung bestätigt wird.
+     *                      für jede bestätigte Bestellung sollte ein Abholetikett für den Stapler ausgestellt werden.
+     */
     @Transactional
     public void bestellungFreigeben(Long liefernummer) {
         Bestellung bestellung = bestellungsRepo.findBestellungByLiefernummer(liefernummer);
         if (bestellung != null) {
-            System.out.println("bestellung mit der Liefernummer " + bestellung.getLieferDatum() + " gefunden");
-            System.out.println("Freigabe der Bestellung vor der Änderungen: " + bestellung.getFreigabe());
+            Abholetikett abholetikett = new Abholetikett(bestellung.getWarenListe());
+
             bestellung.setFreigabe(true);
-            System.out.println("Freigabe der Bestellung nach der Änderungen: " + bestellung.getFreigabe());
             bestellungsRepo.save(bestellung);
-            System.out.println("Bestellung wurde gespeichert");
+
+            abholetikettService.getAbholetikettRepo().save(abholetikett);
         } else
             throw new RuntimeException("Keine Betsellung mit dieser Lieferungsnummer vorhanden");
     }
