@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,6 @@ public class Stapler extends Personal {
 
     @OneToMany(mappedBy = "stapler")
     @Column(name = "ABHL_ETK")
-    private List<Abholetikett> abholetiketts = Collections.emptyList();
+    private List<Abholetikett> abholetiketts = new ArrayList<>();
 
 }

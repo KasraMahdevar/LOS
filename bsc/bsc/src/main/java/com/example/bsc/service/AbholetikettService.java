@@ -36,7 +36,7 @@ public class AbholetikettService {
         for (Abholetikett etk : abholetikettList) {
             AbholetikettGetDto abholetikettGetDto = new AbholetikettGetDto();
 
-            abholetikettGetDto.setEtk_nummer(etk.getEtk_nummer());
+            abholetikettGetDto.setEtk_nummer(etk.getEtk_id());
             abholetikettGetDto.setLagerplatzNummer(etk.getLagerplatznummer());
             abholetikettGetDto.setStatus(etk.getStatus());
             abholetikettGetDto.setWareList(etk.getWarenList());

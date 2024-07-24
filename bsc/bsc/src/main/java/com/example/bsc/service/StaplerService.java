@@ -34,6 +34,7 @@ public class StaplerService {
         for (Stapler stapler : staplers) {
             StaplerGetDto staplerGetDto = new StaplerGetDto();
 
+            staplerGetDto.setId(stapler.getId());
             staplerGetDto.setVorname(stapler.getVorname());
             staplerGetDto.setNachname(stapler.getNachname());
 

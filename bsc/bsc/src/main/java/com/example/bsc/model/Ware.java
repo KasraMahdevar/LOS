@@ -1,5 +1,6 @@
 package com.example.bsc.model;
 
+import com.example.bsc.einlagerung.lager.Lagerplatz;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Nullable;
@@ -47,5 +48,9 @@ public class Ware {
     @Nullable
     @JsonIgnore
     private Bestellung bestellung;
+
+    @ManyToOne
+    @JoinColumn(name = "lagerplatz_id")
+    private Lagerplatz lagerplatz;
 
 }

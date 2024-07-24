@@ -3,6 +3,8 @@ package com.example.bsc.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import com.example.bsc.repo.WareRepo;
 import jakarta.transaction.Transactional;
 
 @Service
+@Getter
+@Setter
 public class WareService {
 
     @Autowired

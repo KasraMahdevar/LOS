@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -105,12 +106,27 @@ public class BestellungsService {
     public void bestellungFreigeben(Long liefernummer) {
         Bestellung bestellung = bestellungsRepo.findBestellungByLiefernummer(liefernummer);
         if (bestellung != null) {
-            Abholetikett abholetikett = new Abholetikett(bestellung.getWarenListe());
-
+            System.out.println("Bestellung gefunden mit der Liefernummer: " + liefernummer);
+            System.out.println("Waren in dieser Bestellung:");
+            for (Ware ware : bestellung.getWarenListe()) {
+                System.out.println("Name: " + ware.getName());
+                System.out.println("Menge: " + ware.getMenge());
+            }
+            Abholetikett abholetikett = new Abholetikett();
+            abholetikett.setLagerplatznummer(abholetikett.lagerplatz_finden());
+            List<Ware> waren = new ArrayList<>();
+            for (Ware ware : bestellung.getWarenListe()) {
+                waren.add(ware);
+            }
+            abholetikett.setWarenList(waren);
+            System.out.println("Abholetikett ausgestellt...");
+            System.out.println("ETK_nummer: " + abholetikett.getEtk_id());
+            System.out.println("ETK_Lagerplatznummer: " + abholetikett.getLagerplatznummer());
             bestellung.setFreigabe(true);
             bestellungsRepo.save(bestellung);
 
             abholetikettService.getAbholetikettRepo().save(abholetikett);
+            System.out.println("Bestellung wurde erfolgreich freigegeben...");
         } else
             throw new RuntimeException("Keine Betsellung mit dieser Lieferungsnummer vorhanden");
     }

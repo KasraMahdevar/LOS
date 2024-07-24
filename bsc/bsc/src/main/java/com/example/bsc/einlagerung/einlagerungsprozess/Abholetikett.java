@@ -4,32 +4,36 @@ import com.example.bsc.einlagerung.lager.Lager;
 import com.example.bsc.einlagerung.lager.Lagerplatz;
 import com.example.bsc.model.Ware;
 import com.example.bsc.personal.Stapler;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Entity
-@Table(name = "ABHL_ETK")
+@Table(name = "ABHOLETIKETT_DB")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Abholetikett {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "etk_nummer", nullable = false)
-    private Long etk_nummer;
+    @Column(name = "etk_id", nullable = false)
+    private Long etk_id;
 
     @Column(name = "lagerplatz_nr")
     private Long lagerplatznummer;
 
     @OneToMany
     @JoinColumn(name = "waren_id")
-    private List<Ware> warenList = Collections.emptyList();
+    private List<Ware> warenList = new ArrayList<>();
 
     @Column(name = "status")
     private Status status = Status.OPEN;
@@ -38,15 +42,9 @@ public class Abholetikett {
     @JoinColumn(name = "stapler_id")
     private Stapler stapler;
 
-
-    public Abholetikett(List<Ware> warenList) {
-        this.warenList = warenList;
-        this.lagerplatznummer = lagerplatz_finden();
-    }
-
     /**
      * @return eine Lagerplatznummer zur Einlagerung finden,
-     *         sonst keinen Platz vorhanden Error
+     * sonst keinen Platz vorhanden Error
      */
     public Long lagerplatz_finden() {
         for (Lagerplatz lagerplatz : Lager.getInstance().getLagerplatzs()) {

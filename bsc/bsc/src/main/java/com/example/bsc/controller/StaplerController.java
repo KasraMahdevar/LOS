@@ -4,17 +4,20 @@ import com.example.bsc.einlagerung.einlagerungsprozess.Abholetikett;
 import com.example.bsc.einlagerung.einlagerungsprozess.AbholetikettGetDto;
 import com.example.bsc.einlagerung.einlagerungsprozess.Status;
 import com.example.bsc.einlagerung.lager.Lagerplatz;
+import com.example.bsc.model.Ware;
 import com.example.bsc.personal.Stapler;
 import com.example.bsc.personal.StaplerDTOs.StaplerGetDto;
 import com.example.bsc.personal.StaplerDTOs.StaplerPostDto;
 import com.example.bsc.service.AbholetikettService;
 import com.example.bsc.service.LagerplatzService;
 import com.example.bsc.service.StaplerService;
+import com.example.bsc.service.WareService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,6 +32,9 @@ public class StaplerController {
 
     @Autowired
     private LagerplatzService lagerplatzService;
+
+    @Autowired
+    private WareService wareService;
 
     @Tag(name = "findet alle Stapler im System")
     @GetMapping("/get_all")
@@ -76,16 +82,30 @@ public class StaplerController {
         if (abhol_etk == null) {
             throw new RuntimeException("Keine Etikette mit dieser Nummer vorhanden!");
         }
+        //TODO Lagerplatz sollte verglichen werden, bevor die Einlagerung erfolgt sonst Error msg für den Staplerfahrer
         abhol_etk.setStatus(Status.DONE);
         abholetikettService.getAbholetikettRepo().save(abhol_etk);
 
         //Die Waren beim Lagerplatz müssen aktualisiert werden
+        System.out.println("gefundene Platznummer vom Etikett: " + abhol_etk.getLagerplatznummer());
         Lagerplatz lagerplatz = lagerplatzService.getLagerplatzRepo().findLagerplatzByPlatznummer(abhol_etk.getLagerplatznummer());
         if (lagerplatz == null) {
             throw new RuntimeException("Lagerplatz nicht vorhanden zum aktualisieren!");
         }
-        lagerplatz.setWarenListe(abhol_etk.getWarenList());
-        lagerplatzService.getLagerplatzRepo().save(lagerplatz);
+        System.out.println("Lagerplatz wurde gefunden: " + lagerplatz.getPlatznummer());
+        System.out.println("Waren werden zum Lagerplatz eingefügt ...");
+        List<Ware> warenList = new ArrayList<>();
+        for(Ware ware : abhol_etk.getWarenList()){
+            ware.setLagerplatz(lagerplatz);
+            wareService.getWareRepo().save(ware);
+            warenList.add(ware);
+        }
+        lagerplatz.setWarenListe(warenList);
+        System.out.println("Waren wurden erfolgreich zum Lagerplatz eingefügt ...");
+        lagerplatz.setBesetzt(true);
+        lagerplatzService.save_lagerplatz_in_db(lagerplatz);
+        System.out.println("lagerplatz Datenbank wurde aktualisiert!");
+        System.out.println("SUPER, Einlagerung DONE");
 
     }
 
