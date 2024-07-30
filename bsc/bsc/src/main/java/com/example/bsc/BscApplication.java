@@ -1,12 +1,13 @@
 package com.example.bsc;
 
-import com.example.bsc.einlagerung.lager.Lager;
-import com.example.bsc.einlagerung.lager.Lagerplatz;
-import com.example.bsc.service.LagerplatzService;
+import com.example.bsc.prozesse.lagerplatz.Lager;
+import com.example.bsc.prozesse.entities.Lagerplatz;
+import com.example.bsc.prozesse.lagerplatz.service.LagerplatzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 import java.util.Random;
 
@@ -37,6 +38,7 @@ public class BscApplication implements CommandLineRunner {
             lagerplatzService.save_lagerplatz_in_db(lagerplatz);
             lager.getLagerplatzs().add(lagerplatz);
         }
+        // get some data from los Database
 
     }
 }

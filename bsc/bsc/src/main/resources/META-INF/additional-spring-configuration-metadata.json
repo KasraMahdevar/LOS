@@ -4,5 +4,15 @@
       "name": "springdoc.swagger-ui.schemas.enabled",
       "type": "java.lang.String",
       "description": "Description for springdoc.swagger-ui.schemas.enabled."
-  }
-] }
+    },
+    {
+      "name": "spring.datasource.post_db.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.post_db.url."
+    },
+    {
+      "name": "app.post.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for app.post.driver-class-name."
+    }
+  ] }
