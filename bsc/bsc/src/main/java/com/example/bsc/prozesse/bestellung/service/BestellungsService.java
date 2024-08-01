@@ -1,22 +1,24 @@
 package com.example.bsc.prozesse.bestellung.service;
 
-import com.example.bsc.prozesse.entities.Abholetikett;
-import com.example.bsc.prozesse.entities.Bestellung;
-import com.example.bsc.prozesse.bestellung.BestellungDTOs.BestellungGetDto;
-import com.example.bsc.prozesse.bestellung.BestellungDTOs.BestellungPostDto;
-import com.example.bsc.prozesse.eingangsetikett.service.AbholetikettService;
-import com.example.bsc.prozesse.waren.service.WareService;
-import com.example.bsc.prozesse.entities.Ware;
-import com.example.bsc.prozesse.waren.WareDTOs.WarePostDto;
-import com.example.bsc.prozesse.entities.Besteller;
-import com.example.bsc.prozesse.besteller.repo.BestellerRepo;
-import com.example.bsc.prozesse.bestellung.repo.BestellungsRepo;
-import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.bsc.prozesse.besteller.repo.BestellerRepo;
+import com.example.bsc.prozesse.bestellung.BestellungDTOs.BestellungGetDto;
+import com.example.bsc.prozesse.bestellung.BestellungDTOs.BestellungPostDto;
+import com.example.bsc.prozesse.bestellung.repo.BestellungsRepo;
+import com.example.bsc.prozesse.eingangsetikett.service.AbholetikettService;
+import com.example.bsc.prozesse.entities.Abholetikett;
+import com.example.bsc.prozesse.entities.Besteller;
+import com.example.bsc.prozesse.entities.Bestellung;
+import com.example.bsc.prozesse.entities.Ware;
+import com.example.bsc.prozesse.waren.WareDTOs.WarePostDto;
+import com.example.bsc.prozesse.waren.service.WareService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class BestellungsService {
@@ -73,7 +75,7 @@ public class BestellungsService {
         new_bestellung.setLiefernummer(bestellungPostDto.getLiefernummer());
         for (WarePostDto wareDto : bestellungPostDto.getWarenListe()) {
             Ware neue_ware = wareService.addWare(wareDto);
-            /* Bestellung sollte eingesetzt werden sonst die Liste von Waren werden nicht zurückgegeben */
+            /* Bestellung sollte eingesetzt werden sonst die Liste von Waren werden nicht zurückgegeben, Verpknüphungsstelle mit der Ware*/
             neue_ware.setBestellung(new_bestellung);
             new_bestellung.getWarenListe().add(neue_ware);
         }

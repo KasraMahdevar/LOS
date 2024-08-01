@@ -1,7 +1,5 @@
 package com.example.bsc.prozesse.entities;
 
-import com.example.bsc.prozesse.entities.Bestellung;
-import com.example.bsc.prozesse.entities.Lagerplatz;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Nullable;

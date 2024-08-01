@@ -1,24 +1,32 @@
 package com.example.bsc.prozesse.stapler.controller;
 
-import com.example.bsc.prozesse.eingangsetikett.Status;
-import com.example.bsc.prozesse.entities.Lagerplatz;
-import com.example.bsc.prozesse.entities.Ware;
-import com.example.bsc.prozesse.entities.Stapler;
-import com.example.bsc.prozesse.stapler.StaplerDTOs.StaplerGetDto;
-import com.example.bsc.prozesse.stapler.StaplerDTOs.StaplerPostDto;
-import com.example.bsc.prozesse.entities.Abholetikett;
-import com.example.bsc.prozesse.eingangsetikett.etikettenDTOs.AbholetikettGetDto;
-import com.example.bsc.prozesse.eingangsetikett.service.AbholetikettService;
-import com.example.bsc.prozesse.lagerplatz.service.LagerplatzService;
-import com.example.bsc.prozesse.stapler.service.StaplerService;
-import com.example.bsc.prozesse.waren.service.WareService;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.bsc.prozesse.eingangsetikett.Status;
+import com.example.bsc.prozesse.eingangsetikett.etikettenDTOs.AbholetikettGetDto;
+import com.example.bsc.prozesse.eingangsetikett.service.AbholetikettService;
+import com.example.bsc.prozesse.entities.Abholetikett;
+import com.example.bsc.prozesse.entities.Lagerplatz;
+import com.example.bsc.prozesse.entities.Stapler;
+import com.example.bsc.prozesse.entities.Ware;
+import com.example.bsc.prozesse.lagerplatz.service.LagerplatzService;
+import com.example.bsc.prozesse.stapler.StaplerDTOs.StaplerGetDto;
+import com.example.bsc.prozesse.stapler.StaplerDTOs.StaplerPostDto;
+import com.example.bsc.prozesse.stapler.service.StaplerService;
+import com.example.bsc.prozesse.waren.service.WareService;
+
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/stapler")

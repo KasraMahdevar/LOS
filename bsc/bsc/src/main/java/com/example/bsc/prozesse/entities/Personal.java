@@ -24,10 +24,10 @@ public abstract  class Personal {
     @Column(name="id", nullable=false)
     private Long id;
 
-    @Column(name="vorname", nullable=false)
+    @Column(name="vorname", nullable=true)
     private String vorname;
 
-    @Column(name="nachname", nullable=false)
+    @Column(name="nachname", nullable=true)
     private String nachname;
 
 }

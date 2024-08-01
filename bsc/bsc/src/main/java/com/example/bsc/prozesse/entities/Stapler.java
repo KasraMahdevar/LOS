@@ -1,15 +1,17 @@
 package com.example.bsc.prozesse.entities;
 
-import com.example.bsc.prozesse.entities.Abholetikett;
-import com.example.bsc.prozesse.entities.Personal;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "STAPLER_DB")

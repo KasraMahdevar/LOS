@@ -1,0 +1,14 @@
+/* import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LosService{
+
+    @Autowired
+    private LosRepo LosRepo
+
+    public List<Object> get_all_data(){
+        return LosRepo.findAll()
+    }
+
+} */
