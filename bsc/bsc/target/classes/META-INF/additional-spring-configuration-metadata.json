@@ -14,5 +14,10 @@
       "name": "app.post.driver-class-name",
       "type": "java.lang.String",
       "description": "Description for app.post.driver-class-name."
+    },
+    {
+      "name": "app.los.datasource.jdbcUrl",
+      "type": "java.lang.String",
+      "description": "Description for app.los.datasource.jdbcUrl."
     }
   ] }
