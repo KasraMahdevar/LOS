@@ -1,16 +1,17 @@
 package com.example.bsc;
 
-import com.example.bsc.los.service.LosService;
-import com.example.bsc.prozesse.entities.Lagerplatz;
-import com.example.bsc.prozesse.lagerplatz.Lager;
-import com.example.bsc.prozesse.lagerplatz.service.LagerplatzService;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Random;
+import com.example.bsc.los.service.LosService;
+import com.example.bsc.prozesse.entities.Lagerplatz;
+import com.example.bsc.prozesse.lagerplatz.Lager;
+import com.example.bsc.prozesse.lagerplatz.service.LagerplatzService;
 
 @SpringBootApplication
 public class BscApplication {

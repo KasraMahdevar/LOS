@@ -2,5 +2,6 @@
     "java.configuration.updateBuildConfiguration": "disabled",
     "java.debug.settings.onBuildFailureProceed": true,
     "java.import.maven.enabled": true,
-    "java.maven.downloadSources": true
+    "java.maven.downloadSources": true,
+    "java.compile.nullAnalysis.mode": "automatic"
 }
