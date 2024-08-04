@@ -2,38 +2,32 @@ package com.example.bsc.los.datasource;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@PropertySource("classpath:application.properties")
 public class LosDataSourceConfig{
 
-    @Autowired
-    private Environment environment;
-
     @Bean(name="losDataSource")
-    @ConfigurationProperties(prefix = "app.los.datasource")
     DataSource losDataSource(){
         var hikariDatasource = new HikariDataSource();
-        hikariDatasource.setJdbcUrl(environment.getProperty("app.los.datasource.jdbcUrl"));
-        hikariDatasource.setUsername(environment.getProperty("app.los.datasource.username"));
-        hikariDatasource.setPassword(environment.getProperty("app.los.datasource.password"));
+        hikariDatasource.setJdbcUrl("jdbc:jtds:sqlserver://los.bsc-intern.de/Schoko_GDS_Lager_Transfer");
+        hikariDatasource.setUsername("Turki");
+        hikariDatasource.setPassword("pMvGDL12wemx97D");
+        hikariDatasource.setConnectionTestQuery("SELECT 1");
+        System.out.println("Alle Konfigurationen wurden erfolgreich initialisiert...");
         return hikariDatasource;
     }
 
 
     @Bean(name = "losJDBCTemplate")
-    JdbcTemplate losJDBCTemplate(@Qualifier("losDataSource") DataSource dataSource){
-        var jdbcTemplate = new JdbcTemplate(dataSource);
+    JdbcTemplate losJDBCTemplate(@Qualifier("losDataSource") DataSource losDataSource){
+        var jdbcTemplate = new JdbcTemplate(losDataSource);
+        System.out.println("JDBCTemplate generiert und wird zurueckgegeben...");
         return jdbcTemplate;
     }
 
